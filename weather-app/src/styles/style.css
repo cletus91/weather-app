@@ -1,0 +1,33 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	--min-width: 450px;
+	--max-width: 90vw;
+	--min-height: 500px;
+	--max-height: 90vh;
+	--background-color: #f2e9e4;
+	--primary-color: #22223b;
+	--secondary-color: #4a4e69;
+	--border-color: #9a8c98;
+}
+
+body {
+	background: var(--background-color);
+	font-size: 16px;
+	font-family: 'Courier New', Courier, monospace;
+}
+
+.container {
+	margin: auto;
+	padding: 2rem;
+	max-width: var(--max-width);
+	min-width: var(--min-width);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
