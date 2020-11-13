@@ -1,35 +1,54 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import axios from 'axios';
+
 require('dotenv').config();
 
-const PresentDay = ({ query }) => {
+const PresentDay = () => {
 	const apiKey = process.env.REACT_APP_API_KEY;
 
+	const [query, setQuery] = useState('');
 	const [initialTemp, latestTemp] = useState({ loading: true, data: null });
 
 	useEffect(() => {
-		fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${query}`)
-			.then((response) => response.json())
-			.then((data) => {
-				latestTemp({ loading: false, data: data });
-				console.log(latestTemp);
+		axios
+			.get(
+				`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${query}`
+			)
+			.then((res) => {
+				latestTemp({ loading: false, data: res.data });
 			});
 	}, [latestTemp, query]);
 
 	console.log(initialTemp);
+
 	return (
 		<div>
+			<div>
+				<input
+					type='text'
+					value={query}
+					placeholder='Enter City'
+					onChange={(e) => setQuery(e.target.value)}
+				/>
+			</div>
+
 			{initialTemp.loading ? (
-				''
+				<h3>Loading...</h3>
 			) : (
-				<p>Current Temperature: {initialTemp.data.current.temp_f}</p>
+				<div>
+					<h1>
+						{initialTemp.data.current.temp_c}°C/
+						{initialTemp.data.current.temp_f}
+						°F
+					</h1>
+					<h3>
+						{initialTemp.data.location.name},{initialTemp.data.location.region},
+						{initialTemp.data.location.country}
+					</h3>
+				</div>
 			)}
 		</div>
 	);
-};
-
-PresentDay.propTypes = {
-	query: PropTypes.string.isRequired,
 };
 
 export default PresentDay;

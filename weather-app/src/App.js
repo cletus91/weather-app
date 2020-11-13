@@ -6,7 +6,7 @@ import './styles/style.css';
 const App = () => {
 	return (
 		<div className='container'>
-			<PresentDay query='los angeles' />
+			<PresentDay />
 			<WeeklyForecast />
 		</div>
 	);
