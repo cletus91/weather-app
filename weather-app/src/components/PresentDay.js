@@ -24,48 +24,87 @@ const PresentDay = () => {
 					.catch((error) => console.log(error.message));
 			}
 		};
+
 		getCurrentWeather();
 	}, [apiKey, query]);
-	console.log(query);
+
 	console.log(initialTemp);
 
 	return (
-		<div>
+		<>
 			<div>
-				<input
-					type='text'
-					value={query}
-					placeholder='Enter City'
-					onChange={(e) => {
-						setQuery(e.target.value);
-					}}
-				/>
+				<label name='Enter City' htmlFor='city name'>
+					Enter City
+				</label>
+				<p>
+					<input
+						type='text'
+						id='city name'
+						value={query}
+						placeholder='Eg:London, UK'
+						onChange={(e) => {
+							setQuery(e.target.value);
+						}}
+					/>
+				</p>
 			</div>
 
 			{initialTemp.loading ? (
-				<h3>Loading...</h3>
+				''
 			) : (
-				<div>
-					<h3>{initialTemp.data.location.name}</h3>
-					<p>
-						{initialTemp.data.location.region},
-						{initialTemp.data.location.country}
-					</p>
-					<h4>
-						{initialTemp.data.current.condition.text}
+				<div className='weather-card'>
+					<div className='weather-card-left'>
+						<h4>
+							<i className='fas fa-map-marker-alt'></i>{' '}
+							{initialTemp.data.location.name ?? 'N/A'}
+						</h4>
+
+						<p>{initialTemp.data.location.localtime ?? 'N/A'}</p>
+
 						<img
-							src={initialTemp.data.current.condition.icon}
-							alt={initialTemp.data.current.condition.text}
+							src={initialTemp.data.current.condition.icon ?? 'N/A'}
+							alt={initialTemp.data.current.condition.text ?? 'N/A'}
+							width='100px'
+							height='100px'
 						/>
-					</h4>
-					<h1>
-						{initialTemp.data.current.temp_c}°C/
-						{initialTemp.data.current.temp_f}
-						°F
-					</h1>
+						<h1>
+							{initialTemp.data.current.temp_c}
+							<span>°C</span>
+						</h1>
+
+						<h4>{initialTemp.data.current.condition.text ?? 'N/A'}</h4>
+					</div>
+
+					<div className='weather-card-right'>
+						<p>
+							feels like
+							<span>{initialTemp.data.current.feelslike_c ?? 'N/A'}°C</span>
+						</p>
+						<p>
+							wind<span> {initialTemp.data.current.wind_mph ?? 'N/A'} mph</span>
+						</p>
+						<p>
+							uv<span> {initialTemp.data.current.uv ?? 'N/A'}</span>
+						</p>
+						<p>
+							humidity<span> {initialTemp.data.current.humidity ?? 'N/A'}</span>
+						</p>
+						<p>
+							precipitation
+							<span> {initialTemp.data.current.precip_in ?? 'N/A'} in</span>
+						</p>
+						<p>
+							pressure
+							<span> {initialTemp.data.current.pressure_in ?? 'N/A'} in</span>
+						</p>
+						<p>
+							visibility
+							<span> {initialTemp.data.current.vis_miles ?? 'N/A'} miles</span>
+						</p>
+					</div>
 				</div>
 			)}
-		</div>
+		</>
 	);
 };
 
