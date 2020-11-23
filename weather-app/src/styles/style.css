@@ -51,21 +51,17 @@ body {
 }
 
 input {
-	margin-bottom: 0.8rem;
+	margin: 0.8rem 0;
 	padding: 10px;
 	font: inherit;
 	width: 600px;
 	max-width: 40vw;
 	height: 35px;
 	border-radius: var(--border-radius-1);
+	border: none;
 	outline: none;
-	border: 1px solid #3c3c3c;
-}
-
-input:focus {
 	background-color: #222831;
-	color: #fff;
-	outline: none;
+	color: var(--primary-color);
 }
 
 .weather-card {
@@ -99,4 +95,8 @@ input:focus {
 .weather-card-right span {
 	float: right;
 	text-transform: none;
+}
+
+.spinner {
+	margin-top: 100px;
 }
