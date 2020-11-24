@@ -82,7 +82,7 @@ input {
 	padding: 0 1.2rem;
 }
 .weather-card-left h1 {
-	margin-top: 4rem;
+	margin-top: 3rem;
 	font-weight: bold;
 }
 .weather-card-right {
@@ -99,4 +99,38 @@ input {
 
 .spinner {
 	margin-top: 100px;
+}
+
+.hourly-forecast {
+	margin-top: 2rem;
+	width: 600px;
+	max-width: 40vw;
+	display: grid;
+	grid-gap: 1rem;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: auto;
+}
+
+.hourly-forecast .item {
+	border: 1px solid var(--secondary-color);
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0px 20px 25px -26px var(--shadow);
+}
+
+.hourly-forecast .item-img {
+	font-size: 0.8rem;
+	flex-direction: row;
+}
+
+.hourly-forecast img {
+	width: 30px;
+	height: 30px;
+}
+
+.hourly-forecast span {
+	color: rgb(46, 138, 212);
 }

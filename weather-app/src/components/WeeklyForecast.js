@@ -1,35 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+
 require('dotenv').config();
 const WeeklyForecast = ({ forecast }) => {
-	// const apiKey = process.env.REACT_APP_API_KEY;
-
-	// const [forecast, setForecast] = useState({ loading: true, data: null });
-	// console.log('query: ' + query);
-	// useEffect(() => {
-	// 	const getCurrentForecast = () => {
-	// 		if (query === '') {
-	// 			return;
-	// 		} else {
-	// 			axios
-	// 				.get(
-	// 					`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${query}`
-	// 				)
-	// 				.then((res) => {
-	// 					setForecast({ loading: false, data: res.data });
-	// 				})
-	// 				.catch((error) => console.log(error.message));
-	// 		}
-	// 	};
-	// 	getCurrentForecast();
-	// }, [apiKey, query]);
-
 	console.log(forecast);
 	return (
-		<div>
-			{/* <p>{forecast ? (forecast.map((i, day) => (day.map((_i, hour) => (
-				<li>{hour.hour.temp_c}</li>
-			)))) : ''}</p> */}
+		<div className='hourly-forecast'>
+			{forecast
+				? forecast.map((currentDay) =>
+						currentDay.hour.map((allHours) => {
+							let tempC = Math.floor(allHours.temp_c);
+							let time = allHours.time;
+							time = new Date(time)
+								.toLocaleTimeString()
+								.replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, '$1$3');
+
+							return (
+								<div key={allHours.time} className='item'>
+									<div className='item-time'>{time}</div>
+									<div className='item-img'>
+										<img
+											className='item-img'
+											src={allHours.condition.icon}
+											alt={allHours.condition.icon}
+										/>
+										<span>
+											{allHours.chance_of_rain && allHours.chance_of_rain > 0
+												? allHours.chance_of_rain
+												: ''}
+										</span>
+									</div>
+									<div className='item-temp'>{tempC}°C</div>
+								</div>
+							);
+						})
+				  )
+				: ''}
 		</div>
 	);
 };
