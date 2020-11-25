@@ -139,6 +139,7 @@ const PresentDay = () => {
 							<WeeklyForecast
 								forecast={initialTemp.data.forecast.forecastday}
 								day={initialTemp.data.current.is_day}
+								localtime={initialTemp.data.location.localtime}
 							/>
 						</div>
 					</div>
