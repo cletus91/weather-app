@@ -66,14 +66,21 @@ const PresentDay = () => {
 			) : (
 				initialTemp.data && (
 					<div>
-						<div className='weather-card'>
+						<div
+							className={`weather-card ${
+								initialTemp.data.current.is_day ? 'day' : 'night'
+							}`}>
 							<div className='weather-card-left'>
 								<h4>
 									<i className='fas fa-map-marker-alt'></i>{' '}
-									{initialTemp.data.location.name ?? 'N/A'}
+									{initialTemp.data.location.name ?? 'N/A'},{' '}
+									{initialTemp.data.location.region ?? 'N/A'}
 								</h4>
-
-								<p>{initialTemp.data.location.localtime ?? 'N/A'}</p>
+								<h5>
+									{new Date(initialTemp.data.location.localtime)
+										.toLocaleTimeString()
+										.replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, '$1$3') ?? 'N/A'}
+								</h5>
 
 								<img
 									src={initialTemp.data.current.condition.icon ?? 'N/A'}
@@ -82,7 +89,7 @@ const PresentDay = () => {
 									height='100px'
 								/>
 								<h1>
-									{initialTemp.data.current.temp_c}
+									{Math.floor(initialTemp.data.current.temp_c)}
 									<span>°C</span>
 								</h1>
 
@@ -131,6 +138,7 @@ const PresentDay = () => {
 						<div>
 							<WeeklyForecast
 								forecast={initialTemp.data.forecast.forecastday}
+								day={initialTemp.data.current.is_day}
 							/>
 						</div>
 					</div>
