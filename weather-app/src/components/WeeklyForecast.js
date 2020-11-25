@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment-timezone';
 
 require('dotenv').config();
 const WeeklyForecast = ({ forecast, day }) => {
@@ -7,13 +8,11 @@ const WeeklyForecast = ({ forecast, day }) => {
 		<div className='hourly-forecast'>
 			{forecast
 				? forecast.map((currentDay) =>
-						currentDay.hour.map((allHours) => {
+						currentDay.hour
+						.filter(hour => !moment(hour.time).isBefore(moment()))
+						.map((allHours) => {
 							let tempC = Math.floor(allHours.temp_c);
-							let time = allHours.time;
-							time = new Date(time)
-								.toLocaleTimeString()
-								.replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, '$1$3');
-
+							let time = moment(allHours.time).format('hh:mm A');
 							return (
 								<div
 									key={allHours.time}
