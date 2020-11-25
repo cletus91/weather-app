@@ -19,6 +19,9 @@
 	--border-color: #9a8c98;
 	--border-color-day: #c8b029;
 	--border-color-night: #2b2a5c;
+	--scroll-track: #100e17;
+	--scroll-thumb: #693699;
+	--scroll-thumb-active: #502989;
 	--border-radius-1: 10px;
 	--border-radius-2: 20px;
 	--border-radius-3: 30px;
@@ -150,4 +153,23 @@ input {
 
 .hourly-forecast span {
 	color: rgb(46, 138, 212);
+}
+
+/* Scrollbar  */
+
+::-webkit-scrollbar {
+	width: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--scroll-track);
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--scroll-thumb);
+	border-radius: var(--border-radius-1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--scroll-thumb-active);
 }
