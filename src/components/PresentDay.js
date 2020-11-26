@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import WeeklyForecast from './WeeklyForecast';
+import HourlyForecast from './HourlyForecast';
 import { Spinner } from './Spinner';
 require('dotenv').config();
 
@@ -136,7 +136,7 @@ const PresentDay = () => {
 							</div>
 						</div>
 						<div>
-							<WeeklyForecast
+							<HourlyForecast
 								forecast={initialTemp.data.forecast.forecastday}
 								day={initialTemp.data.current.is_day}
 								localtime={initialTemp.data.location.localtime}

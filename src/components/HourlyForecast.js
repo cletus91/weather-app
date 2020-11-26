@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment-timezone';
 
 require('dotenv').config();
-const WeeklyForecast = ({ forecast, day, localtime }) => {
+const HourlyForecast = ({ forecast, day, localtime }) => {
 	console.log(forecast);
 	return (
 		<div className='hourly-forecast'>
@@ -40,4 +40,4 @@ const WeeklyForecast = ({ forecast, day, localtime }) => {
 	);
 };
 
-export default WeeklyForecast;
+export default HourlyForecast;
